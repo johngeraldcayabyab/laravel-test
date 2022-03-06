@@ -50,6 +50,7 @@ class WeatherForecast
         if (!$response) {
             return FALSE;
         }
+//        $response =
         return $response;
     }
 
