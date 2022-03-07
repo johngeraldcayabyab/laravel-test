@@ -1,10 +1,9 @@
 <h2><b>Installation Pre-requisites</b></h1>
+
 - Git (any)
 - Composer
-- PHP 8.0.0^
+- PHP 8.1.0^
 - Node and npm
-
-
 
 <h2><b>Installation</b></h1>
 <p>Open terminal</p>
@@ -32,6 +31,15 @@
 <i>Windows</i> <code>copy .env.example .env</code>
 </p>
 
+<p>
+<i>Paste data in .env for openweather config along with openweather api key</i><br/>
+<code>OPENWEATHER_API_KEY={PASTE_OPENWEATHER_API_KEY_HERE}</code><br/>
+<code>OPENWEATHER_API_LANG=</code><br/>
+<code>OPENWEATHER_API_DATE_FORMAT=</code><br/>
+<code>OPENWEATHER_API_TIME_FORMAT=</code><br/>
+<code>OPENWEATHER_API_DAY_FORMAT=</code>
+</p>
+
 
 <p>
 <i>Clear the laravel cache to reflect the changes in .env</i><br/>
@@ -52,6 +60,19 @@
 <i>Now go to your local browser and open the app in <a href="http://localhost:8000/">http://localhost:8000/</a></i><br/>
 </p>
 
+<h2><b>Get city forecast in terminal</b></h1>
+<p>Open terminal</p>
+
+<p>
+<i>Run the artisan command to get a forecast of a city</i><br/>
+<code>php artisan weather:get Tokyo</code>
+</p>
+
+<p>
+<i>Run the artisan command to get a forecast of multiple cities (space delimited)</i><br/>
+<code>php artisan weather:get Tokyo,Manila,Boston</code>
+</p>
+
 
 <hr>
 
@@ -63,4 +84,5 @@
 <code>php artisan config:clear</code><br>
 <code>composer dump-autoload</code><br>
 <code>php artisan config:cache</code><br>
-<code>php artisan migrate:fresh --seed</code> (Changes in the tables and seeds happens a lot in the master branch, this also resets the database)<br>
+<code>php artisan migrate:fresh --seed</code> (Changes in the tables and seeds happens a lot in the master branch, this
+also resets the database)<br>
