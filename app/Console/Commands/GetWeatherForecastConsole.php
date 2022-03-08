@@ -30,35 +30,40 @@ class GetWeatherForecastConsole extends Command
         $headers = ['City'];
         $weatherForecast = new WeatherForecast();
         $cityWeatherForecasts = $weatherForecast->getForecastWeatherByCityName($city);
-        $location = $cityWeatherForecasts['location'];
-        $forecasts = $cityWeatherForecasts['forecast'];
-        $days = ['City' => $location['name']];
-        foreach ($forecasts as $forecast) {
-            $forecastInTime = '';
-            $datetime = $forecast['datetime'];
-            $condition = $forecast['condition'];
-            $forecast = $forecast['forecast'];
-            $day = $datetime['formatted_day'];
-            $conditionDesc = Str::title($condition['name']);
-            $forecastInTime .= "{$datetime['formatted_time']}\n{$conditionDesc}\nTemp: {$forecast['temp']}K\nPressure: {$forecast['pressure']}K\nHumidity: ${forecast['humidity']}%.";
-            $headers[] = $day;
-            $days[$day][] = $forecastInTime;
-        }
-        $headers = array_unique($headers);
-        foreach ($days as $day => $forecasts) {
-            if ($day === 'City') {
-                continue;
-            }
-            $merged = '';
+        if ($cityWeatherForecasts) {
+            $location = $cityWeatherForecasts['location'];
+            $forecasts = $cityWeatherForecasts['forecast'];
+            $days = ['City' => $location['name']];
             foreach ($forecasts as $forecast) {
-                $merged = "{$forecast}\n";
+                $forecastInTime = '';
+                $datetime = $forecast['datetime'];
+                $condition = $forecast['condition'];
+                $forecast = $forecast['forecast'];
+                $day = $datetime['formatted_day'];
+                $conditionDesc = Str::title($condition['name']);
+                $forecastInTime .= "{$datetime['formatted_time']}\n{$conditionDesc}\nTemp: {$forecast['temp']}K\nPressure: {$forecast['pressure']}K\nHumidity: ${forecast['humidity']}%.";
+                $headers[] = $day;
+                $days[$day][] = $forecastInTime;
             }
-            $days[$day] = $merged;
+            $headers = array_unique($headers);
+            foreach ($days as $day => $forecasts) {
+                if ($day === 'City') {
+                    continue;
+                }
+                $merged = '';
+                foreach ($forecasts as $forecast) {
+                    $merged = "{$forecast}\n";
+                }
+                $days[$day] = $merged;
+            }
+            $this->table(
+                $headers,
+                [$days]
+            );
+            return true;
         }
-        $this->table(
-            $headers,
-            [$days]
-        );
+        $this->info("$city city is not supported");
+        return false;
     }
 }
 
