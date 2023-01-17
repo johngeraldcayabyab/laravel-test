@@ -4,9 +4,8 @@ namespace OpenClosePrinciple;
 
 class SalesOrderSequence implements SequenceInterface
 {
-
-    public function generate()
+    public function generate(): string
     {
-        echo 'SO/0001';
+        return 'SO/0001';
     }
 }

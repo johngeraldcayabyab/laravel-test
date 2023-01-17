@@ -5,9 +5,9 @@ namespace OpenClosePrinciple;
 class InventoryOperationSequence implements SequenceInterface
 {
 
-    public function generate()
+    public function generate(): string
     {
-        echo 'INV/0001';
+        return 'INV/0001';
         // TODO: Implement generate() method.
     }
 }

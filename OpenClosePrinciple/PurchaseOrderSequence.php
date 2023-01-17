@@ -5,8 +5,8 @@ namespace OpenClosePrinciple;
 class PurchaseOrderSequence implements SequenceInterface
 {
 
-    public function generate()
+    public function generate(): string
     {
-        echo 'PO/0001';
+        return 'PO/0001';
     }
 }

@@ -4,5 +4,5 @@ namespace OpenClosePrinciple;
 
 interface SequenceInterface
 {
-    public function generate();
+    public function generate(): string;
 }
